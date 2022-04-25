@@ -54,5 +54,13 @@ namespace BookStore.Services.Categories
                 throw new CategoryNotFoundException();
             }
         }
+
+        public void Delete(int id)
+        {
+            var category = _repository.Getbyid(id);
+            _repository.Remove(category);
+
+            _unitOfWork.Commit();
+        }
     }
 }

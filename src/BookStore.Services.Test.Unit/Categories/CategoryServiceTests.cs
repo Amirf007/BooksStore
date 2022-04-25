@@ -74,15 +74,24 @@ namespace BookStore.Services.Test.Unit.Categories
             return category;
         }
 
-        //[Fact]
-        //public void Update_throw_CategoryNotFoundException_when_category_with_given_id_does_not_exist()
-        //{
-        //    var dummyCategoryId = 1000;
-        //    var dto = CreateUpdateCategoryDto("editetitle");
+        [Fact]
+        public void Update_throw_CategoryNotFoundException_when_category_with_given_id_does_not_exist()
+        {
+            var dummyCategoryId = 1000;
+            var dto = CreateUpdateCategoryDto("editetitle");
 
-        //    Action Expected =()=> _sut.Update(dummyCategoryId, dto);
-        //    Expected.Should().ThrowExactly<CategoryNotFoundException>();
-        //}
+            Action Expected = () => _sut.Update(dummyCategoryId, dto);
+            Expected.Should().ThrowExactly<CategoryNotFoundException>();
+        }
+
+        [Fact]
+        public void Delete_Delete_Category_properly()
+        {
+            var category = CreateCategory();
+
+            _sut.Delete(category.Id);
+            _dataContext.Categories.Should().HaveCount(0);
+        }
 
         [Fact]
         public void GetAll_returns_all_categories()
