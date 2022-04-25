@@ -5,6 +5,7 @@ using BookStore.Persistence.EF;
 using BookStore.Persistence.EF.Categories;
 using BookStore.Services.Categories;
 using BookStore.Services.Categories.Contracts;
+using BookStore.Test.Tools.Categories;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,9 @@ namespace BookStore.Services.Test.Unit.Categories
         [Fact]
         public void Update_update_category_properly()
         {
-            Category category = CreateCategory();
+            var category = CategoryFactory.CreateCategory("TwelveChairs");
+            _dataContext.Manipulate(_ => _.Categories.Add(category));
+             
             UpdateCategoryDto dto = CreateUpdateCategoryDto("editecategorytitle");
             
             _sut.Update(category.Id, dto);
@@ -64,16 +67,6 @@ namespace BookStore.Services.Test.Unit.Categories
             };
         }
 
-        private Category CreateCategory()
-        {
-            var category = new Category
-            {
-                Title = "TwelveChairs"
-            };
-            _dataContext.Manipulate(_ => _.Categories.Add(category));
-            return category;
-        }
-
         [Fact]
         public void Update_throw_CategoryNotFoundException_when_category_with_given_id_does_not_exist()
         {
@@ -87,7 +80,8 @@ namespace BookStore.Services.Test.Unit.Categories
         [Fact]
         public void Delete_Delete_Category_properly()
         {
-            var category = CreateCategory();
+            var category = CategoryFactory.CreateCategory("TwelveChairs");
+            _dataContext.Manipulate(_ => _.Categories.Add(category));
 
             _sut.Delete(category.Id);
             _dataContext.Categories.Should().HaveCount(0);
