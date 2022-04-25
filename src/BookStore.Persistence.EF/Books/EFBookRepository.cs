@@ -26,5 +26,10 @@ namespace BookStore.Persistence.EF.Books
         {
             return _dataContext.Books.Find(id);
         }
+
+        public void Remove(Book book)
+        {
+            _dataContext.Books.Remove(book);
+        }
     }
 }

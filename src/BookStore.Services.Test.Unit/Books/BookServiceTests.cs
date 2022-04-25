@@ -83,6 +83,20 @@ namespace BookStore.Services.Test.Unit.Books
             Expected.CategoryId.Should().Be(updateBookDto.CategoryId);
         }
 
+        [Fact]
+        public void Delete_delete_book_properly()
+        {
+            var category = CategoryFactory.CreateCategory("categorytitle");
+            _dataContext.Manipulate(_ => _.Categories.Add(category));
+
+            AddBookDto dto = GenerateAddBookDto(category);
+            _sut.Add(dto);
+            var book = _dataContext.Books.FirstOrDefault();
+
+            _sut.Delete(book.Id);
+            _dataContext.Books.Should().HaveCount(0);
+        }
+
         private static UpdateBookDto GenerateUpdateBookDto()
         {
             return new UpdateBookDto

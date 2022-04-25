@@ -35,6 +35,14 @@ namespace BookStore.Services.Books
             _unitOfWork.Commit();
         }
 
+        public void Delete(int id)
+        {
+            var book = _repository.GetbyId(id);
+
+            _repository.Remove(book);
+            _unitOfWork.Commit();
+        }
+
         public void Update(int id, UpdateBookDto dto)
         {
             var book = _repository.GetbyId(id);

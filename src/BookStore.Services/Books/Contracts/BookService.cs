@@ -11,5 +11,6 @@ namespace BookStore.Services.Books.Contracts
     {
         void Add(AddBookDto dto);
         void Update(int id, UpdateBookDto updateBookDto);
+        void Delete(int id);
     }
 }

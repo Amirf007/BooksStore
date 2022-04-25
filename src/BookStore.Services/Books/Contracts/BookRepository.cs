@@ -12,5 +12,6 @@ namespace BookStore.Services.Books.Contracts
     {
         void Add(Book book);
         Book GetbyId(int id);
+        void Remove(Book book);
     }
 }
