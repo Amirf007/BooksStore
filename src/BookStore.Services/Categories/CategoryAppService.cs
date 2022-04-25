@@ -58,9 +58,19 @@ namespace BookStore.Services.Categories
         public void Delete(int id)
         {
             var category = _repository.Getbyid(id);
+            PreventDeleteWhenNotExistCategory(category);
+
             _repository.Remove(category);
 
             _unitOfWork.Commit();
+        }
+
+        private static void PreventDeleteWhenNotExistCategory(Category category)
+        {
+            if (category == null)
+            {
+                throw new CategoryNotFoundException();
+            }
         }
     }
 }

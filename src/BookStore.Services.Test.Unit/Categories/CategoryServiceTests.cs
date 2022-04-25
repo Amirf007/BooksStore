@@ -94,6 +94,16 @@ namespace BookStore.Services.Test.Unit.Categories
         }
 
         [Fact]
+        public void Delete_throw_CategoryNotFoundExeption_when_category_with_given_id_that_nit_exist()
+        {
+            var dummyCategorId = 1000;
+
+            Action Expected =()=> _sut.Delete(dummyCategorId);
+            Expected.Should().ThrowExactly<CategoryNotFoundException>();
+
+        }
+
+        [Fact]
         public void GetAll_returns_all_categories()
         {
             CreateCategoriesInDataBase();
