@@ -73,6 +73,18 @@ namespace BookStore.Services.Test.Unit.Books
             ChechUpdateTest(updateBookDto);
         }
 
+        [Fact]
+        public void Update_update_throw_BookNotFoundExeption_when_book_with_given_id_that_not_exist()
+        {
+            int dummyId = 1000;
+
+            UpdateBookDto updateBookDto = GenerateUpdateBookDto();
+
+            Action expected = () => _sut.Update(dummyId, updateBookDto);
+
+            expected.Should().Throw<BookNotFoundException>();
+        }
+
         private void ChechUpdateTest(UpdateBookDto updateBookDto)
         {
             var Expected = _dataContext.Books.FirstOrDefault();

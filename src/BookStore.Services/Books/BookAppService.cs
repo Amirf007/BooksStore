@@ -46,6 +46,7 @@ namespace BookStore.Services.Books
         public void Update(int id, UpdateBookDto dto)
         {
             var book = _repository.GetbyId(id);
+            PreventUpdateBookWhenNotExistBook(book);
 
             book.Title = dto.Title;
             book.Description = dto.Description;
@@ -54,6 +55,14 @@ namespace BookStore.Services.Books
             book.CategoryId = dto.CategoryId;
 
             _unitOfWork.Commit();
+        }
+
+        private static void PreventUpdateBookWhenNotExistBook(Book book)
+        {
+            if (book == null)
+            {
+                throw new BookNotFoundException();
+            }
         }
     }
 }
