@@ -12,5 +12,6 @@ namespace BookStore.Services.Categories.Contracts
     {
         void Add(Category category);
         IList<GetCategoryDto> GetAll();
+        Category Getbyid(int id);
     }
 }
