@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Services.Categories.Contracts
 {
-    public class UpdateCategoryDto
+    public class CategoryNotFoundException : Exception
     {
-        public string Title { get; set; }
     }
 }

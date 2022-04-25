@@ -30,5 +30,10 @@ namespace BookStore.Persistence.EF.Categories
                     Title = _.Title
                 }).ToList();
         }
+
+        public Category Getbyid(int id)
+        {
+            return _dataContext.Categories.Find(id);
+        }
     }
 }

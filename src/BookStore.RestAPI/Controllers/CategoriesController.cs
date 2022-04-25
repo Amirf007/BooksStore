@@ -19,5 +19,11 @@ namespace BookStore.RestAPI.Controllers
         {
             _service.Add(dto);
         }
+
+        [HttpPut("{id}")]
+        public void Update(int id,UpdateCategoryDto dto)
+        {
+            _service.Update(id, dto);
+        }
     }
 }
