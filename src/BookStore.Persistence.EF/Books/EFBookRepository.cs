@@ -21,5 +21,10 @@ namespace BookStore.Persistence.EF.Books
         {
             _dataContext.Books.Add(book);
         }
+
+        public Book GetbyId(int id)
+        {
+            return _dataContext.Books.Find(id);
+        }
     }
 }

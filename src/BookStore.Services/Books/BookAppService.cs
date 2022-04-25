@@ -34,5 +34,18 @@ namespace BookStore.Services.Books
             _repository.Add(book);
             _unitOfWork.Commit();
         }
+
+        public void Update(int id, UpdateBookDto dto)
+        {
+            var book = _repository.GetbyId(id);
+
+            book.Title = dto.Title;
+            book.Description = dto.Description;
+            book.Pages = dto.Pages;
+            book.Author = dto.Author;
+            book.CategoryId = dto.CategoryId;
+
+            _unitOfWork.Commit();
+        }
     }
 }
