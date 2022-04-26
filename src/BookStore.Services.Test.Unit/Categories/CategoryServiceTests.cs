@@ -59,14 +59,6 @@ namespace BookStore.Services.Test.Unit.Categories
             Expected.Title.Should().Be(dto.Title);
         }
 
-        private static UpdateCategoryDto CreateUpdateCategoryDto(string title)
-        {
-            return new UpdateCategoryDto
-            {
-                Title = title,
-            };
-        }
-
         [Fact]
         public void Update_throw_CategoryNotFoundException_when_category_with_given_id_does_not_exist()
         {
@@ -92,7 +84,7 @@ namespace BookStore.Services.Test.Unit.Categories
         {
             var dummyCategorId = 1000;
 
-            Action Expected =()=> _sut.Delete(dummyCategorId);
+            Action Expected = () => _sut.Delete(dummyCategorId);
             Expected.Should().ThrowExactly<CategoryNotFoundException>();
 
         }
@@ -108,6 +100,14 @@ namespace BookStore.Services.Test.Unit.Categories
             expected.Should().Contain(_ => _.Title == "dummy1");
             expected.Should().Contain(_ => _.Title == "dummy2");
             expected.Should().Contain(_ => _.Title == "dummy3");
+        }
+
+        private static UpdateCategoryDto CreateUpdateCategoryDto(string title)
+        {
+            return new UpdateCategoryDto
+            {
+                Title = title,
+            };
         }
 
         private void CreateCategoriesInDataBase()

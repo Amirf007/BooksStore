@@ -46,16 +46,6 @@ namespace BookStore.Services.Test.Unit.Books
             CheckAddBookTest(dto);
         }
 
-        private void CheckAddBookTest(AddBookDto dto)
-        {
-            var Expected = _dataContext.Books.FirstOrDefault();
-            Expected.Title.Should().Be(dto.Title);
-            Expected.Description.Should().Be(dto.Description);
-            Expected.Author.Should().Be(dto.Author);
-            Expected.Pages.Should().Be(dto.Pages);
-            Expected.CategoryId.Should().Be(dto.CategoryId);
-        }
-
         [Fact]
         public void Update_update_book_properly()
         {
@@ -83,16 +73,6 @@ namespace BookStore.Services.Test.Unit.Books
             Action expected = () => _sut.Update(dummyId, updateBookDto);
 
             expected.Should().Throw<BookNotFoundException>();
-        }
-
-        private void ChechUpdateTest(UpdateBookDto updateBookDto)
-        {
-            var Expected = _dataContext.Books.FirstOrDefault();
-            Expected.Title.Should().Be(updateBookDto.Title);
-            Expected.Description.Should().Be(updateBookDto.Description);
-            Expected.Author.Should().Be(updateBookDto.Author);
-            Expected.Pages.Should().Be(updateBookDto.Pages);
-            Expected.CategoryId.Should().Be(updateBookDto.CategoryId);
         }
 
         [Fact]
@@ -129,6 +109,26 @@ namespace BookStore.Services.Test.Unit.Books
 
             var Expected = _sut.Getall();
             Expected.Should().HaveCount(2);
+        }
+
+        private void CheckAddBookTest(AddBookDto dto)
+        {
+            var Expected = _dataContext.Books.FirstOrDefault();
+            Expected.Title.Should().Be(dto.Title);
+            Expected.Description.Should().Be(dto.Description);
+            Expected.Author.Should().Be(dto.Author);
+            Expected.Pages.Should().Be(dto.Pages);
+            Expected.CategoryId.Should().Be(dto.CategoryId);
+        }
+
+        private void ChechUpdateTest(UpdateBookDto updateBookDto)
+        {
+            var Expected = _dataContext.Books.FirstOrDefault();
+            Expected.Title.Should().Be(updateBookDto.Title);
+            Expected.Description.Should().Be(updateBookDto.Description);
+            Expected.Author.Should().Be(updateBookDto.Author);
+            Expected.Pages.Should().Be(updateBookDto.Pages);
+            Expected.CategoryId.Should().Be(updateBookDto.CategoryId);
         }
 
         private void CreateCategoriesInDatabase(Category category)

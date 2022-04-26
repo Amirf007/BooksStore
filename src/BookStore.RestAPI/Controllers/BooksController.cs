@@ -1,5 +1,6 @@
 ﻿using BookStore.Services.Books.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace BookStore.RestAPI.Controllers
 {
@@ -23,6 +24,18 @@ namespace BookStore.RestAPI.Controllers
         public void Update(int id , UpdateBookDto dto)
         {
             _service.Update(id, dto);
+        }
+
+        [HttpGet]
+        public List<GetBookDto> Getall()
+        {
+            return _service.Getall();
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _service.Delete(id);
         }
     }
 }
