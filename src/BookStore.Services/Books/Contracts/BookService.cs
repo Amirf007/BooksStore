@@ -1,4 +1,5 @@
-﻿using BookStore.Infrastructure.Application;
+﻿using BookStore.Entities;
+using BookStore.Infrastructure.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace BookStore.Services.Books.Contracts
         void Add(AddBookDto dto);
         void Update(int id, UpdateBookDto updateBookDto);
         void Delete(int id);
+        List<GetBookDto> Getall();
     }
 }

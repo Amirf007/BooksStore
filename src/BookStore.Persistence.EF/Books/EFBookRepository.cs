@@ -22,6 +22,18 @@ namespace BookStore.Persistence.EF.Books
             _dataContext.Books.Add(book);
         }
 
+        public List<GetBookDto> Getall()
+        {
+            return _dataContext.Books.Select(_ => new GetBookDto
+            {
+                Title = _.Title,
+                Pages = _.Pages,
+                Author = _.Author,
+                Description = _.Description,
+                CategoryId = _.CategoryId,
+            }).ToList();
+        }
+
         public Book GetbyId(int id)
         {
             return _dataContext.Books.Find(id);

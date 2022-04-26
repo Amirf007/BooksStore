@@ -73,5 +73,10 @@ namespace BookStore.Services.Books
                 throw new BookNotFoundException();
             }
         }
+
+        public List<GetBookDto> Getall()
+        {
+            return _repository.Getall();
+        }
     }
 }

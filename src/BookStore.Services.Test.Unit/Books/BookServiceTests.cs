@@ -119,6 +119,43 @@ namespace BookStore.Services.Test.Unit.Books
             expected.Should().Throw<BookNotFoundException>();
         }
 
+        [Fact]
+        public void GetAll_returns_all_books()
+        {
+            var category = CategoryFactory.CreateCategory("categorytitle");
+            _dataContext.Manipulate(_ => _.Categories.Add(category));
+
+            CreateCategoriesInDatabase(category);
+
+            var Expected = _sut.Getall();
+            Expected.Should().HaveCount(2);
+        }
+
+        private void CreateCategoriesInDatabase(Category category)
+        {
+            var books = new List<Book>
+            {
+              new Book
+              {
+                  Title = "dnhk",
+                  Author = "dse",
+                  Pages = 7,
+                  Description = "sfcse",
+                  CategoryId = category.Id,
+              },
+              new Book
+              {
+
+                  Title = "eeee",
+                  Author = "eee",
+                  Pages = 12,
+                  Description = "eee",
+                  CategoryId = category.Id,
+              }
+            };
+            _dataContext.Manipulate(_ => _.Books.AddRange(books));
+        }
+
         private static UpdateBookDto GenerateUpdateBookDto()
         {
             return new UpdateBookDto
