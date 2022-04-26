@@ -52,9 +52,15 @@ namespace BookStore.Services.Test.Unit.Books
             var category = CategoryFactory.CreateCategory("categorytitle");
             _dataContext.Manipulate(_ => _.Categories.Add(category));
 
-            AddBookDto dto = GenerateAddBookDto(category);
-            _sut.Add(dto);
-            var book = _dataContext.Books.FirstOrDefault();
+            Book book = new Book
+            {
+                Title = "kjdhjdf",
+                Description = "khyg",
+                Author = "ggvfs",
+                Pages = 25,
+                CategoryId = category.Id,
+            };
+            _dataContext.Manipulate(_ => _.Books.Add(book));
 
             UpdateBookDto updateBookDto = GenerateUpdateBookDto();
 
