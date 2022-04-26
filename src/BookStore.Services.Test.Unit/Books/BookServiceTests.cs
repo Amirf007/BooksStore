@@ -109,6 +109,16 @@ namespace BookStore.Services.Test.Unit.Books
             _dataContext.Books.Should().HaveCount(0);
         }
 
+        [Fact]
+        public void Delete_delete_throw_BookNotFoundExeption_when_book_with_given_id_that_not_exist()
+        {
+            int dummyId = 1000;
+
+            Action expected = () => _sut.Delete(dummyId);
+
+            expected.Should().Throw<BookNotFoundException>();
+        }
+
         private static UpdateBookDto GenerateUpdateBookDto()
         {
             return new UpdateBookDto

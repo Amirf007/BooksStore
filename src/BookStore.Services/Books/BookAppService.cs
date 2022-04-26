@@ -38,9 +38,18 @@ namespace BookStore.Services.Books
         public void Delete(int id)
         {
             var book = _repository.GetbyId(id);
+            PreventDeleteBookWhenNotExistBook(book);
 
             _repository.Remove(book);
             _unitOfWork.Commit();
+        }
+
+        private static void PreventDeleteBookWhenNotExistBook(Book book)
+        {
+            if (book == null)
+            {
+                throw new BookNotFoundException();
+            }
         }
 
         public void Update(int id, UpdateBookDto dto)
